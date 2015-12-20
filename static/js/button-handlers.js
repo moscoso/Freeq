@@ -4,10 +4,19 @@ $("document").ready(function(){
     });
     
     $("#create-btn").on("click", function(){
-        var name = $("room-name").val();
-        var description = $("room-description").val();
+        console.log('testing');
+        /*var name = $("#room-name").value;
+        var description = $("#room-description").value;
         //Use these to create the room in the data base and return a room ID.
-        window.location.href = "/room";
+        console.log(name);
+        console.log(description);
+        $.ajax({
+            type : "GET",
+            url : "/save_room/" + String(name) + '/' + String(description),
+            success: function(result) {
+                window.location.href = "/room/" + result;
+            }
+        });*/
     })
     
     $(".search-music-btn").on("click", function(){
