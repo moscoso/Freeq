@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Freeq</title>  
+
+        <!--Bootstrap CSS-->
+        <link rel="stylesheet" href="../static/libs/bootstrap/bootstrap.min.css">
+        <!--FontAwesome CSS-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <h1>Welcome to Freeq</h1>
+                <h3>Join Room:</h3>
+                <input class="col-xs-12 col-sm-3" id="room-id" placeholder="Room ID" type="number"/>
+            </div>
+            <div class="row">
+                <button id="create-room-btn">Create A Room!</button>
+            </div>
+        </div>
+
+
+        {% include "script-includes.html" %}
+    </body>
+</html>
