@@ -13,4 +13,9 @@ $("document").ready(function(){
     $(".search-music-btn").on("click", function(){
         window.location.href = "/search";
     });
+    
+    $(".search-btn").on("click", function(){
+        var searchText = $("#search").val();
+        //Execute youtube search
+    });
 });
