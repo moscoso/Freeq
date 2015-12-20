@@ -16,6 +16,22 @@ $("document").ready(function(){
     
     $(".search-btn").on("click", function(){
         var searchText = $("#search").val();
+        console.log("Search button pressed");
         //Execute youtube search
+        $.ajax({
+            type: "GET",
+            url: "/search_yt/" + searchText,
+            success: function(result){
+                //Clear results list
+                $(".results-list").html("");
+                //Fetch results from youtube
+                var results = JSON.parse(result);
+                for (var i=0; i<results.length; i++){
+                    $(".results-list").append("<div class='result-thumb'><img src='"+results[i].url+"'/></div><div class='result' <div class='result-title'>"+results[i].title+"</div>"+
+                                             "<!--<div class='result-date'>"+results[i].date+"</div>"+
+                                             "<div class='result-description'>"+results[i].description+"</div>--></div>");    
+                }
+            }
+        });
     });
 });

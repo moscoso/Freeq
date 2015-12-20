@@ -40,9 +40,10 @@ def room():
 def search():
 	return render_template("search.html.jinja2")
 
-@app.route("/search_yt/<query>")
-def search(query):
+@app.route("/search_yt/<query>", methods=["GET"])
+def search_yt(query):
 	results = yt.search(query, MAX_RESULTS)
+    print query
 	return json.dumps(results)
 
 if __name__ == "__main__":
