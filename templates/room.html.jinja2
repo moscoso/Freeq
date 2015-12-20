@@ -4,14 +4,30 @@
     <body>
         <div class="container">
             <div class="row">
-                <h2>Room Name:</h2>
-                <input id="room-name"/>
+                <h3 class="room-name">room Name</h3>
+                <h5 class="room-description">Room Description</h5>
+            </div>
                 
-                <h2>Room Description:</h2>
-                <input id="room-description"/>
+            <div class="row" style="background:rgba(0,100,255,0.5);">
+                <h4 class="current-song-name col-xs-12">current song</h4>
+                
+                
+                <div class="col-xs-6">progress bar</div>
+                <div class="controls col-xs-6">
+                    <button class="play-btn col-xs-3 col-xs-offset-1"><i class="fa fa-play"></i></button>
+                    <button class="pause-btn col-xs-3 col-xs-offset-1"><i class="fa fa-pause"></i></button>
+                    <button class="stop-btn col-xs-3 col-xs-offset-1"><i class="fa fa-stop"></i></button>
+                </div>
+            </div>
+            
+            <div class="row">
+                <button class="search-music-btn btn-primary">Search for music</button>
+            </div>
+            <div class="row">
+                <button class="show-queue-btn btn-info">Show queue</button>
             </div>
         </div>
-        
+
         {% include "script-includes.html" %}
     </body>
 </html>
