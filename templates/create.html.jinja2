@@ -2,8 +2,22 @@
 <html>
     {% include "head.html" %}
     <body>
-        
-        
+        <div class="container">
+            <div class="row">
+                <h2>Room Name:</h2>
+                <input id="room-name" class="col-xs-12 col-sm-3" type="text"/>
+
+            </div>
+            <div class="row">
+                <h2>Room Description:</h2>
+                <textarea id="room-description" class="col-xs-12 col-sm-3" type="text" placeholder="Tell your guests about what this room is and what type of music we’re going for!" maxlength="1000" rows="5"></textarea>
+            </div>
+            
+            <div class="row">
+                <button id="create-btn" class="btn-primary">Create!</button>
+            </div>
+        </div>
+
         {% include "script-includes.html" %}
     </body>
 </html>

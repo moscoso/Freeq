@@ -19,15 +19,19 @@ app = Flask(__name__, static_folder=static_dir)
 #====[ Routes to home screen where user enters screen name  ]=====
 @app.route("/")
 def home():
-	return render_template("index.html.jinja2")
-
-@app.route("/testing")
-def testing():
-	return "we're testing this ish"
+    return render_template("index.html.jinja2")
 
 @app.route("/create")
 def create():
 	return render_template("create.html.jinja2")
+
+@app.route("/room")
+def room():
+	return render_template("room.html.jinja2")
+
+@app.route("/search")
+def search():
+	return render_template("search.html.jinja2")
 
 
 if __name__ == "__main__":

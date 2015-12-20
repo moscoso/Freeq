@@ -1,0 +1,22 @@
+<!DOCTYPE>
+<html>
+    {% include "head.html" %}
+    <body>
+        <div class="container">
+            <div class="row">
+                <h1>Search for Music</h1>
+                <input id="search" class="col-xs-10" placeholder="Search"/>
+                <button class="search-btn btn-primary col-xs-2">Go</button> 
+            </div>
+            
+            <div class="row results hidden-xs">
+                <h1>Results</h1>
+                <div class="results-list">
+                
+                </div>
+            </div>
+        </div>
+
+        {% include "script-includes.html" %}
+    </body>
+</html>
