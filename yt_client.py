@@ -1,39 +1,39 @@
-def SearchAndPrintVideosByKeywords(list_of_search_terms):
-  yt_service = gdata.youtube.service.YouTubeService()
-  query = gdata.youtube.service.YouTubeVideoQuery()
-  query.orderby = 'viewCount'
-  query.racy = 'include'
-  for search_term in list_of_search_terms:
-    new_term = search_term.lower()
-    query.categories.append('/%s' % new_term)
-  feed = yt_service.YouTubeQuery(query)
-  PrintVideoFeed(feed)
+from apiclient.discovery import build
+from apiclient.errors import HttpError
+from oauth2client.tools import argparser
 
-def PrintVideoFeed(feed):
-  for entry in feed.entry:
-    PrintEntryDetails(entry)
 
-def PrintEntryDetails(entry):
-  print 'Video title: %s' % entry.media.title.text
-  print 'Video published on: %s ' % entry.published.text
-  print 'Video description: %s' % entry.media.description.text
-  print 'Video category: %s' % entry.media.category[[]0].text
-  print 'Video tags: %s' % entry.media.keywords.text
-  print 'Video watch page: %s' % entry.media.player.url
-  print 'Video flash player URL: %s' % entry.GetSwfUrl()
-  print 'Video duration: %s' % entry.media.duration.seconds
+#=====[ Set developer key, API service name, and current version  ]=====
+DEVELOPER_KEY = "AIzaSyB5dlz_1B2MswSziCGCxmJKJ9M4Z_a9KAU"
+YOUTUBE_API_SERVICE_NAME = "youtube"
+YOUTUBE_API_VERSION = "v3"
 
-  # non entry.media attributes
-  print 'Video geo location: %s' % entry.geo.location()
-  print 'Video view count: %s' % entry.statistics.view_count
-  print 'Video rating: %s' % entry.rating.average
+#=====[ Define our yt_client  ]=====
+class yt_client():
 
-  # show alternate formats
-  for alternate_format in entry.media.content:
-    if 'isDefault' not in alternate_format.extension_attributes:
-      print 'Alternate format: %s | url: %s ' % (alternate_format.type,
-                                                 alternate_format.url)
+	def __init__(self):
+		self.yt = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
+    	developerKey=DEVELOPER_KEY)
 
-  # show thumbnails
-  for thumbnail in entry.media.thumbnail:
-    print 'Thumbnail url: %s' % thumbnail.url
+	#=====[ Searches for a query term with and returns at most max_results  ]=====
+	def search(self, search_term,max_results):
+	 
+	 	#=====[ Build and execute request ]=====
+		search_response = self.yt.search().list(
+			q=search_term,
+			part="snippet",
+			maxResults=max_results
+		).execute()
+
+		videos = []
+
+		#=====[ Add only results that are videos  ]=====
+		for search_result in search_response.get("items", []):
+			if search_result["id"]["kind"] == "youtube#video":
+				videos.append({'url':search_result['snippet']['thumbnails']['default']['url'],
+					'title':search_result['snippet']['title'],
+					'date':search_result['snippet']['publishedAt'],
+					'description':search_result['snippet']['description']})
+
+		#=====[ Print search results  ]=====
+		return videos
