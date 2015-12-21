@@ -15,6 +15,7 @@ import sys
 import os
 import json
 import pickle
+import urllib
 import hashlib
 import base64
 from datetime import datetime
@@ -25,6 +26,7 @@ base_dir = os.path.split(os.path.realpath(__file__))[0]
 static_dir = os.path.join(base_dir, 'static')
 
 #=====[ Instantiate our youtube client  ]=====
+rooms = pickle.load(open('rooms.p','rb'))
 yt = yt_client()
 MAX_RESULTS = 20
 
@@ -42,22 +44,31 @@ def create():
 
 @app.route("/save_room/<name>/<description>", methods = ['GET'])
 def save_room(name, description):
-	print "in save room"
-	
-	#=====[ Get hashed_id  ]=====
-	hash_id = base64.urlsafe_b64encode(hashlib.md5(str(datetime.now())).digest())[0:LINK_LEN]
+
+	#=====[ Decode parameters -- UTF-8  ]=====
+	name = urllib.unquote(name).decode('utf8') 
+	description = urllib.unquote(description).decode('utf8') 
+
+	#=====[ Get unique hash_id  ]=====
+	while(True):
+		hash_id = base64.urlsafe_b64encode(hashlib.md5(str(datetime.now())).digest())[0:LINK_LEN]
+		if hash_id not in rooms:
+			break
 
 	#=====[ Update database  ]=====
-	print name
-	print description
-	print hash_id
+	rooms[hash_id] = {'hash_id':hash_id, 'name':name,'description':description,'songs':[],'status':'stop','location':0}
+	pickle.dump(rooms, open('rooms.p','wb'))
 
 	return hash_id
 
 @app.route("/room/<room_id>")
 def room(room_id):
-	return render_template("room.html.jinja2",room_id)
-
+	
+	#=====[ Get correct room object  ]=====
+	room = rooms[room_id]
+	
+	return render_template("room.html.jinja2", room=room)
+	
 @app.route("/search")
 def search():
 	return render_template("search.html.jinja2")
