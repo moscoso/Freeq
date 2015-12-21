@@ -94,5 +94,22 @@ def view_rooms():
 		string+= str(rooms[room]) + '\n\n'
 	return string
 
+@app.route('/add_video')
+def add_video():
+	
+	data = request.json
+	
+	#=====[ Get room to add music to  ]=====
+	room = rooms[data['room_id']]
+
+	#=====[ Create song object  ]=====
+	song = {'video_id':data['video_id'],'title':data['title'],'date':data['date'],'description':data['description']}
+
+	room['songs'].append(song)
+
+@app.route('/play_vid')
+def play_vid():
+	return render_template("play_vid.html.jinja2")
+
 if __name__ == "__main__":
 	app.run()
