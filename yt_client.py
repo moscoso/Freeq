@@ -30,7 +30,10 @@ class yt_client():
 		#=====[ Add only results that are videos  ]=====
 		for search_result in search_response.get("items", []):
 			if search_result["id"]["kind"] == "youtube#video":
-				videos.append({'url':search_result['snippet']['thumbnails']['default']['url'],
+				print search_result
+				videos.append({
+					'id':search_result["id"]["videoId"],
+                    'thumb_url':search_result['snippet']['thumbnails']['default']['url'],
 					'title':search_result['snippet']['title'],
 					'date':search_result['snippet']['publishedAt'],
 					'description':search_result['snippet']['description']})

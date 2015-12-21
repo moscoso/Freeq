@@ -17,12 +17,12 @@ p8
 sS'location'
 p9
 I0
-sS'hash_id'
-p10
-g1
 sS'songs'
-p11
-(lp12
+p10
+(lp11
+sS'hash_id'
+p12
+g1
 ssS'kA8Wc8'
 p13
 (dp14
@@ -95,7 +95,7 @@ p46
 sS'hash_id'
 p48
 g37
-ssS'cg3Rr0'
+ssS'E14fHo'
 p49
 (dp50
 S'status'
@@ -104,22 +104,22 @@ S'stop'
 p52
 sS'description'
 p53
-VMo' rooms
+Vhello
 p54
 sS'name'
 p55
-VRoom2
+VBrandon
 p56
 sS'location'
 p57
 I0
-sS'songs'
-p58
-(lp59
 sS'hash_id'
-p60
+p58
 g49
-ssS'ksfn4r'
+sS'songs'
+p59
+(lp60
+ssS'cg3Rr0'
 p61
 (dp62
 S'status'
@@ -128,11 +128,11 @@ S'stop'
 p64
 sS'description'
 p65
-VMore rooms
+VMo' rooms
 p66
 sS'name'
 p67
-VChris
+VRoom2
 p68
 sS'location'
 p69
@@ -143,7 +143,7 @@ p70
 sS'hash_id'
 p72
 g61
-ssS'q1cd00'
+ssS'ksfn4r'
 p73
 (dp74
 S'status'
@@ -152,11 +152,11 @@ S'stop'
 p76
 sS'description'
 p77
-VMo f'in descriptions
+VMore rooms
 p78
 sS'name'
 p79
-VRoom3
+VChris
 p80
 sS'location'
 p81
@@ -167,4 +167,28 @@ p82
 sS'hash_id'
 p84
 g73
+ssS'q1cd00'
+p85
+(dp86
+S'status'
+p87
+S'stop'
+p88
+sS'description'
+p89
+VMo f'in descriptions
+p90
+sS'name'
+p91
+VRoom3
+p92
+sS'location'
+p93
+I0
+sS'songs'
+p94
+(lp95
+sS'hash_id'
+p96
+g85
 ss.
