@@ -64,11 +64,19 @@ def save_room(name, description):
 @app.route("/room/<room_id>")
 def room(room_id):
 	
+	decoded_id = urllib.unquote(room_id).decode('utf8')
+	
 	#=====[ Get correct room object  ]=====
-	room = rooms[room_id]
-	
-	return render_template("room.html.jinja2", room=room)
-	
+	if decoded_id in rooms:
+		room = rooms[decoded_id]
+		return render_template("room.html.jinja2", room=room)
+
+	#=====[ If no room with specified ID, return error message to home screen  ]=====
+	else:
+		message = 'No room with id: ' + str(decoded_id)
+		errors=[message]
+		return render_template("index.html.jinja2", errors=errors)
+
 @app.route("/search")
 def search():
 	return render_template("search.html.jinja2")
@@ -78,6 +86,30 @@ def search_yt(query):
 	results = yt.search(query, MAX_RESULTS)
 	print query
 	return json.dumps(results)
+
+@app.route('/view_rooms')
+def view_rooms():
+	string=''
+	for room in rooms:
+		string+= str(rooms[room]) + '\n\n'
+	return string
+
+@app.route('/add_video')
+def add_video():
+	
+	data = request.json
+	
+	#=====[ Get room to add music to  ]=====
+	room = rooms[data['room_id']]
+
+	#=====[ Create song object  ]=====
+	song = {'video_id':data['video_id'],'title':data['title'],'date':data['date'],'description':data['description']}
+
+	room['songs'].append(song)
+
+@app.route('/play_vid')
+def play_vid():
+	return render_template("play_vid.html.jinja2")
 
 if __name__ == "__main__":
 	app.run()
