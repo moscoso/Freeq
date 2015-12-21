@@ -94,18 +94,20 @@ def view_rooms():
 		string+= str(rooms[room]) + '\n\n'
 	return string
 
-@app.route('/add_video')
+@app.route('/add_video', methods=['POST'])
 def add_video():
 	
 	data = request.json
-	
+
 	#=====[ Get room to add music to  ]=====
 	room = rooms[data['room_id']]
 
 	#=====[ Create song object  ]=====
-	song = {'video_id':data['video_id'],'title':data['title'],'date':data['date'],'description':data['description']}
+	song = {'id':data['id'],'title':data['title'],'date':data['date'],'description':data['description']}
 
 	room['songs'].append(song)
+
+	return 'OK'
 
 @app.route('/play_vid')
 def play_vid():

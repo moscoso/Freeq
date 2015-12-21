@@ -9,6 +9,13 @@ $("document").ready(function(){
 		window.location.href = "/create";    
 	});
 
+	$("#join-room-btn").on("click", function(){
+        var room_id = $("#room-id").val();
+
+        //Use these to create the room in the data base and return a room ID.
+        window.location.href = '/room/' + encodeURI(room_id)
+    })
+
 	$("#create-btn").on("click", function(){
 		var name = $("#room-name").val();
 		var description = $("#room-description").val();
@@ -46,13 +53,15 @@ $("document").ready(function(){
 			
 			$.ajax({
 				type : "POST",
-				url: "/add_video/",
+				url: "/add_video",
 				data: JSON.stringify(j),
-				contentTYpe: 'application/json',
-				success : function(){
+				contentType: 'application/json',
+				success : function(result){
 					console.log("ADDED TO QUEUE");	
 				}
 			});
+
+
 		});
 
 
