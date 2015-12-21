@@ -2,6 +2,14 @@ $("document").ready(function(){
     $("#create-room-btn").on("click", function(){
         window.location.href = "/create";    
     });
+
+     $("#join-room-btn").on("click", function(){
+        var room_id = $("#room-id").val();
+
+        //Use these to create the room in the data base and return a room ID.
+        window.location.href = '/room/' + encodeURI(room_id)
+    })
+    
     
     $("#create-btn").on("click", function(){
         var name = $("#room-name").val();
@@ -12,7 +20,7 @@ $("document").ready(function(){
             type : "GET",
             url : "/save_room/" + encodeURI(name) + '/' + encodeURI(description),
             success: function(result) {
-                window.location.href = "/room/" + result;
+                window.location.href = "/room/" + encodeURI(result);
             }
         });
     })

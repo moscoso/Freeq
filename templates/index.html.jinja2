@@ -14,15 +14,24 @@
             <div class="row">
                 <h1>Welcome to Freeq</h1>
                 <h3>Join a room:</h3>
-                <input class="col-xs-12 col-sm-3" id="room-id" placeholder="Room ID" type="number"/>
+                <input class="col-xs-12 col-sm-2" id="room-id" placeholder="Room ID" type="text"/>
+                <button id="join-room-btn" class="btn-primary">Join a room!</button>
             </div>
             <div class="row">
                 <h3>Or create a room:</h3>
                 <button id="create-room-btn" class="btn-primary">Create a room!</button>
             </div>
-        </div>
 
+            <div class="row errors">
+                {% for error in errors %}
+                    <p>{{error}} </p>
+                {% endfor %}
+            </div>
+
+        </div>
 
         {% include "script-includes.html" %}
     </body>
+
+    
 </html>
