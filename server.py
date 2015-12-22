@@ -56,7 +56,7 @@ def save_room(name, description):
 			break
 
 	#=====[ Update database  ]=====
-	rooms[hash_id] = {'hash_id':hash_id, 'name':name,'description':description,'songs':[],'status':'stop','location':0}
+	rooms[hash_id] = {'hash_id':hash_id, 'name':name,'description':description,'songs':[],'status':'stop','location':-1}
 	pickle.dump(rooms, open('rooms.p','wb'))
 
 	return hash_id
@@ -109,8 +109,23 @@ def add_video():
 
 	return 'OK'
 
+@app.route('/get_next_video/<room_id>',methods=['GET'])
+def get_next_video(room_id):
+
+	room = rooms[room_id]
+	location = room['location']
+
+	#=====[ Returns location in the queue if not at end  ]=====
+	if location < len(room['songs']):
+		rooms[room_id]['location'] += 1
+		pickle.dump(rooms,open('rooms.p','wb'))
+		return room['songs'][location]
+
+	return None
+
+
 @app.route('/play_vid')
-def play_vid():
+def play_vid(): 
 	return render_template("play_vid.html.jinja2")
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 /* Dependencies
 	youtube-api-calls.js
+	freeq-api-calls.js
 	html-factory.js
 */
 
@@ -43,15 +44,12 @@ $("document").ready(function(){
 		$(".results-list").append(createResultsList(results_json))
 
 		$(".add-to-queue-btn").on("click", function(){
-			console.log("fire");
-			console.log($(this));
-			console.log($(this).attr("data-json"));
 			
-			var j = JSON.parse($(this).attr("data-json"));
-			j["room_id"] = "E14fHo";
+			var data = JSON.parse($(this).attr("data-json"));
+			data["room_id"] = "E14fHo";
 			
-			
-			$.ajax({
+			freeq_addVideo(data);
+			/*$.ajax({
 				type : "POST",
 				url: "/add_video",
 				data: JSON.stringify(j),
@@ -59,7 +57,7 @@ $("document").ready(function(){
 				success : function(result){
 					console.log("ADDED TO QUEUE");	
 				}
-			});
+			});*/
 
 
 		});
