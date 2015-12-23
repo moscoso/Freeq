@@ -19,9 +19,10 @@ function setRemove(){
 
 //Instantiates a Youtube Player object with a specified song id
 function makePlayer(song_id){
-  var video = $('<video />', {
-    src: 'http://youtube.com/watch?v='+song_id,
-    controls: true
+  var video = $('<iframe/>', {
+    src: 'http://youtube.com/embed/'+song_id+'',
+    controls: true,
+	  allowfullscreen: true
   });
   $('#'+toRemove).append(video);
   setRemove();
